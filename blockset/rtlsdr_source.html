@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>rtlsdr_source :: Block Reference :: Simulink-RTL-SDR</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <link href="style.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+
+    <!-- Navigation Bar Top -->
+    <table cellspacing="0" cellpadding="0" border="0" width="100%" summary="Navigation aid"
+      class="nav">
+      <tbody>
+        <tr>
+          <td> <b>Simulink-RTL-SDR</b> </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Headline -->
+    <h1>rtlsdr Source block</h1>
+
+    <hr />
+
+    <!-- Description -->
+    <h2>Description</h2>
+    The rtlsdr Source block is used to receive data from a rtl-sdr device. The block acts as a frontend for the <em>rtlsdr_source</em> S-function.<br /><br />
+  	<p> <img src="rtlsdr_source_icon.png" /><br /> <br /><br /></p>
+
+  	<!-- On this Page... -->
+      <table cellspacing="0" cellpadding="4" border="0" class="pagenavtable">
+        <tbody>
+          <tr>
+            <th> Select Tab Pane... </th>
+          </tr>
+          <tr>
+            <td>
+              <p><a href="#device">Device</a></p>
+  			      <p><a href="#mb">Baseband</a></p>
+  			      <p><a href="#rx">RF-Frontend</a></p>
+  			      <p><a href="#misc">Miscellaneous (Misc)</a></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  	<br /><br />
+	
+    <!-- Device Tab -->
+    <h2>Dialog Box</h2>
+		The dialog box can be used to set the parameters of the rtl-sdr device. <br /><br />
+    <h3><a name="device">Device Tab Pane</a></h3>
+    <p> <img src="rtlsdr_source_Device.png" /> </p>
+    <dl>
+      <dt> <b>Device Index</b><br />
+      </dt>
+      <dd>
+        <p> Specify the index of the attached rtl-sdr device (e.g. <tt>0</tt>). Available devices can be found using the "Find Devices" button.</p>
+      </dd>
+	  <dt> <b>Find Devices</b><br />
+      </dt>
+      <dd>
+        <p> The Find Devices checkbox acts like a push-button and displays information and parameters about discoverd rtl-sdr devices in the MATLAB console. (Just to make sure, the checkbox can't be selected.)</p>
+      </dd>
+   </dl>
+
+    <!-- Baseband Tab -->
+    <h3><a name="mb">Baseband Tab Pane</a></h3>
+    <h3></h3>
+    <p> <img src="rtlsdr_source_Baseband.png" /> </p>
+	<dl>
+      <dt> <b>Sample Rate</b><br />
+      </dt>
+      <dd>
+        <p> Set the rate in Samples per second (Sps) of the received samples from the rtl-sdr device (e.g. <tt>1e6</tt>). The rtlsdr Source block will report an error, if the Sample Rate isn't possible.</p>
+      </dd>
+	  <dt> <b>Sample per frame</b><br />
+      </dt>
+      <dd>
+        <p> Specify the number of samples per frame of the block output (e.g. <tt>1024</tt>).</p>
+      </dd>
+	  <dt> <b>Output Type</b><br />
+      </dt>
+      <dd>
+        <p> Choose between a frame-based or a vector-based output. See the MATLAB documentation for more information.</p>
+      </dd>
+    </dl>
+	
+	<!-- RF-Frontend Tab -->
+    <h3><a name="tx">RF-Frontend Tab Pane</a></h3>
+    <h3></h3>
+    <p> <img src="rtlsdr_source_RF-Frontend.png" /> </p>
+    <dl>
+      <dt> <b>Carrier Frequency (Hz)</b> </dt>
+      <dd>
+        <p> Specify the carrier frequency of the received signal (e.g. <tt>100e6</tt>). Set the <em>tunable</em> checkbox to tune during runtime using an additional input port.</p>
+      <dt> <b>Gain (dB) (0=automatic)</b> </dt>
+      <dd>
+        <p> Specify any gain or attenuation within the gain range of the rtl-sdr device (e.g. <tt>10</tt>). Use 0 to set the automatic gain control. Set the <em>tunable</em> checkbox to change the gain during runtime using an additional gain input port.</p>
+      </dd>
+      <dt> <b>Digital AGC on</b> </dt>
+      <dd>
+        <p> Enable or disable the internal digital AGC of the RTL2832.</p>
+      </dd>
+    </dl>
+	
+	<!-- Misc Tab -->
+	<h3><a name="misc">Misc Tab Pane</a></h3>
+    <h3></h3>
+    <p> <img src="rtlsdr_source_Misc.png" /> </p>
+    <dl>
+      <dt> <b>Restore Block Size</b> </dt>
+      <dd>
+        <p> Restore the geometric size of the rtlsdr Source block. The checkbox acts like a push-button and hence can't be set.
+        </p>
+      </dd>
+      <dt> <b>Display S-function parameters</b> </dt>
+      <dd>
+        <p> Just for debug purposes: Display the S-function parameters in the MATLAB console.
+        </p>
+      </dd>
+    </dl>
+
+    <!-- Navigation Bar Bottom -->
+    <p></p>
+    <table cellspacing="0" cellpadding="0" border="0" width="100%" summary="Navigation aid"
+      class="nav">
+      <tbody>
+        <tr>
+          <td> </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Copyright --> <br />
+    <p class="copy"> © 2012 <a href="http://www.cel.kit.edu/english/index.php">
+        Communications Engineering Lab</a> <tt class="minicdot">•</tt>
+      <a href="index.html">Homepage</a> </p>
+  </body>
+</html>
