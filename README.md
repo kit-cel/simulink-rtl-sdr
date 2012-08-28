@@ -10,7 +10,7 @@ For more information, please visit the Simulink-RTL-SDR [project page](http://ww
 Requirements
 ------------
 
-- MATLAB/Simulink (R2009b or newer) and *MEX* compatible compiler
+- MATLAB/Simulink (R2009b or newer) and *MEX* compatible [compiler](http://www.mathworks.de/support/compilers)
 
 - *rtl-sdr* library from the [OsmoSDR Wiki](http://sdr.osmocom.org/trac/wiki/rtl-sdr "rtl-sdr project page")
 
