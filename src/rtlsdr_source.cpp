@@ -245,7 +245,7 @@ static void mdlStart(SimStruct *S)
     int* gains = (int*)malloc(MAX_NO_GAINS);
     ret = rtlsdr_get_tuner_gains(_device, gains);
     if (ret <= 0) {
-        ssSetErrorStatusf(S, "Failed to get rtl-sdr Tuner gains.");
+        ssSetErrorStatus(S, "Failed to get rtl-sdr Tuner gains.");
     }
     ssSetPWorkValue(S, GAINS, gains);
     

@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.18"
+    ComputedModelVersion    "1.19"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -38,9 +38,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "schwall"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Aug 17 16:32:44 2012"
-  RTWModifiedTimeStamp	  267121956
-  ModelVersionFormat	  "1.%<AutoIncrement:18>"
+  LastModifiedDate	  "Thu Sep 06 09:12:23 2012"
+  RTWModifiedTimeStamp	  268823533
+  ModelVersionFormat	  "1.%<AutoIncrement:19>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -78,6 +78,7 @@ Model {
     $ObjectID		    2
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "test"
+    signals_		    []
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
@@ -682,7 +683,7 @@ Model {
   }
   System {
     Name		    "rtlsdr_spectrum_scope_demo"
-    Location		    [821, 294, 1461, 625]
+    Location		    [511, 291, 1151, 622]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -696,7 +697,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "32"
+    SIDHighWatermark	    "33"
     Block {
       BlockType		      Reference
       Name		      "Model Info"
@@ -774,12 +775,12 @@ Model {
     }
     Block {
       BlockType		      Reference
-      Name		      "rtlsdr_source1"
-      SID		      "32"
+      Name		      "rtlsdr_source"
+      SID		      "33"
       Ports		      [0, 1]
-      Position		      [115, 175, 265, 235]
+      Position		      [165, 175, 315, 235]
       ZOrder		      -5
-      LibraryVersion	      "1.20"
+      LibraryVersion	      "1.24"
       SourceBlock	      "rtlsdr/rtlsdr_source"
       SourceType	      "rtl-sdr Source"
       rtlsdr_device_index     "0"
@@ -789,14 +790,13 @@ Model {
       rtlsdr_frame_type	      "Frame"
       rtlsdr_frequency	      "100e6"
       rtlsdr_frequency_tune   off
-      rtlsdr_gain	      "16.5"
+      rtlsdr_gain	      "0"
       rtlsdr_gain_tune	      off
       rtlsdr_agc_on	      off
       rtlsdr_restore_block    off
-      rtlsdr_sfunparam	      off
     }
     Line {
-      SrcBlock		      "rtlsdr_source1"
+      SrcBlock		      "rtlsdr_source"
       SrcPort		      1
       DstBlock		      "Spectrum\nScope"
       DstPort		      1

@@ -16,9 +16,9 @@ Library {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "schwall"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Aug 17 16:30:37 2012"
-  RTWModifiedTimeStamp	  267121831
-  ModelVersionFormat	  "1.%<AutoIncrement:20>"
+  LastModifiedDate	  "Thu Sep 06 09:11:29 2012"
+  RTWModifiedTimeStamp	  268821919
+  ModelVersionFormat	  "1.%<AutoIncrement:24>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -635,7 +635,7 @@ Library {
   }
   System {
     Name		    "rtlsdr"
-    Location		    [393, 346, 973, 606]
+    Location		    [633, 319, 1213, 579]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -658,7 +658,7 @@ Library {
       Position		      [180, 90, 330, 150]
       ZOrder		      -5
       FunctionName	      "rtlsdr_source"
-      Parameters	      "0,1000000,100000000,0,0,1024,1"
+      Parameters	      "set_index,samplerate,set_freq,set_gain,set_agc,set_frame,set_frame_type"
       EnableBusSupport	      off
       MaskType		      "rtl-sdr Source"
       MaskDescription	      "Receive data from the rtl-sdr device.\nUse \"Find Devices\" to obtain the appropriate par"
@@ -666,13 +666,12 @@ Library {
       MaskHelp		      "web(fullfile(rtlsdr_get_path, 'blockset', 'rtlsdr_source.html'), '-helpbrowser')"
       MaskPromptString	      "Device Index:|Find Devices (click, see MATLAB console output)|Sample Rate (Sps):|Samples"
       " per frame:|Output Type:|Carrier Frequency (Hz):|tunalbe (use external signal)|Gain (dB) (0=automatic):|tunable "
-      "(use external signal)|Digital AGC on|Restore Block Size (click)|Display S-function parameters"
+      "(use external signal)|Digital AGC on|Restore Block Size (click)"
       MaskStyleString	      "edit,checkbox,edit,edit,popup(Frame|Vector),edit,checkbox,edit,checkbox,checkbox,checkbox"
-      ",checkbox"
       MaskVariables	      "rtlsdr_device_index=@1;rtlsdr_query=@2;rtlsdr_samplerate=@3;rtlsdr_frame_length=@4;rtlsdr_f"
       "rame_type=&5;rtlsdr_frequency=@6;rtlsdr_frequency_tune=@7;rtlsdr_gain=@8;rtlsdr_gain_tune=@9;rtlsdr_agc_on=@10;r"
-      "tlsdr_restore_block=@11;rtlsdr_sfunparam=@12;"
-      MaskTunableValueString  "off,on,on,on,off,on,on,on,on,on,on,on"
+      "tlsdr_restore_block=@11;"
+      MaskTunableValueString  "off,on,on,on,off,on,on,on,on,on,on"
       MaskCallbackString      "|stat=get_param(gcb,'rtlsdr_query');\nset_param(gcb,'rtlsdr_query','off');\n\nif strcmp"
       "(stat,'on')\n    clear stat;\n    rtlsdr_find_devices;\nend\n\nclear stat;|||||maskpos=find(ismember(get_param(g"
       "cb,'MaskNames'), 'rtlsdr_frequency')==1);\nenables=get_param(gcb,'MaskEnables');\n\nif strcmp(get_param(gcb,'rtl"
@@ -683,32 +682,33 @@ Library {
       "gcb,'MaskEnables',enables);\n\nclear maskpos enables||% restore block size\nblock_width=150;\nblock_height=60;\n"
       "\nif strcmp(get_param(gcb,'rtlsdr_restore_block'),'on')\n   pos=get_param(gcb,'Position');\n   pos=[pos(1) pos(2"
       ") pos(1)+block_width pos(2)+block_height];\n   set_param(gcb,'Position',pos);\nend\n\nset_param(gcb,'rtlsdr_rest"
-      "ore_block','off');\n\nclear pos block_width block_height|"
-      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on"
-      MaskInitialization      "% initialize\nmask_display_text = [];\n\nport=0;\n\n% check if frequency is selected tu"
-      "nable\nif (strcmp(get_param(gcb,'rtlsdr_frequency_tune'),'on'))\n    freq='[]';\n    port=port+1;\n    mask_disp"
-      "lay_text = [mask_display_text 'port_label(''input'',' num2str(port) ',''freq'');'];\nelse\n    freq=num2str(uint"
-      "32(rtlsdr_frequency));\n    if (rtlsdr_frequency ~= uint32(rtlsdr_frequency))\n            fprintf('Frequency ad"
-      "justed to %d\\n',uint32(rtlsdr_frequency));\n    end\nend\n\n% check if gain is selected tunable\nif (strcmp(get"
-      "_param(gcb,'rtlsdr_gain_tune'),'on'))\n    gain='[]';\n    port=port+1;\n    mask_display_text = [mask_display_t"
-      "ext 'port_label(''input'',' num2str(port) ',''gain'');'];\nelse\n    gain=num2str(int32(10*rtlsdr_gain));\n    i"
-      "f ((10*rtlsdr_gain) ~= int32(10*rtlsdr_gain))\n            fprintf('Gain adjusted to %0.f dB\\n',double(int32(10"
-      "*rtlsdr_gain))/10);\n    end\nend\n\n% check if agc is on\nif (strcmp(get_param(gcb,'rtlsdr_agc_on'),'on'))\n   "
-      " agc_on=1;\nelse\n    agc_on=0;\nend\n\n% check device identifier\nif strcmp(get_param(gcb,'rtlsdr_device_index'"
-      "),' ')\n    mask_display_text = [mask_display_text 'disp(''No Device'');'];\nelse\n    mask_display_text = [mask"
-      "_display_text 'disp(''rtl-sdr #' num2str(rtlsdr_device_index) ''');'];\nend\n    \n% set mask display\nset_param"
-      "(gcb,'MaskDisplay',mask_display_text);\n\n% get frame type\nif (strcmp(get_param(gcb,'rtlsdr_frame_type'),'Frame"
-      "'))\n    % use frames\n    frame_type=1;\nelse\n    % use vectors\n    frame_type=0;\nend\n\n% get samplerate\ni"
-      "f (isreal(rtlsdr_samplerate))\n    if (rtlsdr_samplerate > 0)\n        samplerate=uint32(rtlsdr_samplerate);\n  "
-      "      if (samplerate ~= rtlsdr_samplerate)\n            fprintf('Sample Rate adjusted to %u Sps\\n',samplerate);"
-      "\n        end\n    else\n        samplerate=1;\n        disp('Error in Sample Rate');\n    end\nelse\n    sample"
-      "rate=1;\n    disp('Error in Sample Rate');\nend\n\n% 0,1e-6,101.8e6,0,1,1024,1\n% set s-function parameters\npar"
-      "am=sprintf('%d,%d,%s,%s,%d,%d,%d', ...\n   rtlsdr_device_index, ...\n   samplerate, ...\n   freq, ...\n   gain, "
-      "...\n   agc_on, ...\n   rtlsdr_frame_length, ...\n   frame_type);\n\n% Display S-function parameters\nif (strcmp"
-      "(get_param(gcb,'rtlsdr_sfunparam'),'on'))\n    fprintf('\\nS-function parameters:\\n%s\\n',param)\nend\n\nset_pa"
-      "ram(gcb,'Parameters',param);"
+      "ore_block','off');\n\nclear pos block_width block_height"
+      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on"
+      MaskInitialization      "% initialize\nmask_display_text = [];\n\nport=0;\n\n% check identifier\nif (isreal(rtls"
+      "dr_device_index) && rtlsdr_device_index >= 0)\n    set_index=rtlsdr_device_index;\nelse\n    error('The device i"
+      "ndex must be a number greater or equal 0 !!!')\nend\n\n% mask display device index\nif strcmp(get_param(gcb,'rtl"
+      "sdr_device_index'),' ')\n    mask_display_text = [mask_display_text 'disp(''No Device'');'];\nelse\n    mask_dis"
+      "play_text = [mask_display_text 'disp(''rtl-sdr #' num2str(rtlsdr_device_index) ''');'];\nend\n\n% check samplera"
+      "te\nif (isreal(rtlsdr_samplerate))\n    if (rtlsdr_samplerate > 0)\n        samplerate=uint32(rtlsdr_samplerate)"
+      ";\n        if (samplerate ~= rtlsdr_samplerate)\n            fprintf('Sample Rate adjusted to %u Sps\\n',sampler"
+      "ate);\n        end\n    else\n        error('The samplerate has to be greater than 0 !!!')\n    end\nelse\n    e"
+      "rror('The samplerate has to be number !!!')\nend\n\n% check frequency\nif (isreal(rtlsdr_frequency) && rtlsdr_fr"
+      "equency >= 0)\n    if (strcmp(get_param(gcb,'rtlsdr_frequency_tune'),'on'))\n        set_freq=[];\n        port="
+      "port+1;\n        mask_display_text = [mask_display_text 'port_label(''input'',' num2str(port) ',''freq'');'];\n "
+      "   else\n        set_freq=uint32(rtlsdr_frequency);\n        if (set_freq ~= rtlsdr_frequency)\n                "
+      "fprintf('Frequency adjusted to %d\\n',set_freq);\n        end\n    end\nelse\n    error('The frequency has to be"
+      " number greater than 0 !!!')\nend\n    \n\n% check gain\nif (isreal(rtlsdr_gain))\n    if (strcmp(get_param(gcb,"
+      "'rtlsdr_gain_tune'),'on'))\n        set_gain=[];\n        port=port+1;\n        mask_display_text = [mask_displa"
+      "y_text 'port_label(''input'',' num2str(port) ',''gain'');'];\n    else\n        set_gain=int32(10*rtlsdr_gain);\n"
+      "        if (set_gain ~= 10*rtlsdr_gain)\n                fprintf('Gain adjusted to %0.f dB\\n',double(set_gain)/"
+      "10);\n        end\n    end\nelse\n    error('The gain has to be number !!!')\nend\n    \n% check agc\nif (strcmp"
+      "(get_param(gcb,'rtlsdr_agc_on'),'on'))\n    set_agc=1;\nelse\n    set_agc=0;\nend\n\n\n% check frame length\nif "
+      "(isreal(rtlsdr_frame_length) && rtlsdr_frame_length > 0)\n    set_frame=rtlsdr_frame_length;\nelse\n    error('T"
+      "he frame length has to be number greater than 0 !!!')\nend\n\n% check frame type\nif (strcmp(get_param(gcb,'rtls"
+      "dr_frame_type'),'Frame'))\n    % use frames\n    set_frame_type=1;\nelse\n    % use vectors\n    set_frame_type="
+      "0;\nend\n    \n% set mask display\nset_param(gcb,'MaskDisplay',mask_display_text);"
       MaskSelfModifiable      on
       MaskDisplay	      "disp('rtl-sdr #0');"
       MaskIconFrame	      on
@@ -716,9 +716,9 @@ Library {
       MaskIconRotate	      "none"
       MaskPortRotate	      "default"
       MaskIconUnits	      "autoscale"
-      MaskValueString	      "0|off|1e6|1024|Frame|100e6|off|0|off|off|off|off"
+      MaskValueString	      "0|off|1e6|1024|Frame|100e6|off|0|off|off|off"
       MaskTabNameString	      "Device,Device,Baseband,Baseband,Baseband,RF-Frontend,RF-Frontend,RF-Frontend,RF-Fronten"
-      "d,RF-Frontend,Misc,Misc"
+      "d,RF-Frontend,Misc"
     }
   }
 }
