@@ -6,7 +6,7 @@
   <head>
     <title>Function References :: Simulink-RTL-SDR</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="../../uhd_helper/help/style.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
 
   <body><!-- Navigation Bar Top -->
@@ -69,27 +69,43 @@ Device Index 0
 
   <!-- rtlsdr_dev -->
   <br />
-    <h2><a name="rtlsdr_find_devices">rtlsdr_find_devices</a></h2>
-    rtl-sdr devices attached to the host can be discovered using this function. The function returns a summary about connected devices containg the device index, the name and other useful information.<br />
-    <h3>Usage:</h3>
+    <h2><a name="rtlsdr_dev">rtlsdr_dev</a></h2>
+    This function can be used to receive IQ-samples from the rtl-sdr device inside of MATLAB scripts. The usage is quite simple. Try <tt>help rtlsdr_dev</tt> for more information:
     <table cellspacing="0" cellpadding="5" border="1" class="note" style="width: 161px; height: 53px;">
       <tbody>
         <tr width="90%">
           <td>
-            <pre>&gt;&gt; <b>rtlsdr_find_devices</b><br /><br />
-Found 1 device(s):
+            <pre>&gt;&gt; <b>help rtlsdr_dev</b>
 
-Device Index 0
-  Vendor:   Realtek
-  Product:  RTL2838UHIDIR
-  Serial:   00000001
-  Gains [dB]: -1.0 1.5 4.0 6.5 9.0 11.5 14.0 16.5 19.0 21.5 24.0 29.0 34.0 42.0 43.0 45.0 47.0 49.0 
-  Tuner:    E4000
+ Usage:
+ 
+        # Initialize rtl-sdr device:
+ 
+            handle = rtlsdr_dev(index)
+ 
+        # Close rtl-sdr device:
+ 
+            rtlsdr_dev(handle)
+ 
+        # Receive IQ-samples from rtl-sdr device:
+ 
+            data = rtlsdr_dev(handle,samplerate,frequency,gain,agc,buf_length)
+ 
+ 
+              index - The device index (e.g. 0).
+             handle - The returned handle used for addressing the initialized rtl-sdr device.
+         samplerate - The sampling rate of the device (e.g. 1e6 for 1 MHz bandwidth)
+          frequency - The center frequency of the tuner (e.g. 100e6 for 100 MHz).
+               gain - The overall gain of the receiver. Use 0 for automatic.
+                agc - Switch the internal digital AGC On or Off (0 means Off).
+         buf_length - The number of samples in the receive buffer (e.g. 1000).
+               data - The received IQ-samples.
             </pre>
           </td>
         </tr>
       </tbody>
     </table>
+    There is also a script <em>rtlsdr_mscript_demo</em> available in the <em>demo</em> folder.
 
     <!-- Navigation Bar Bottom -->
     <p></p>
