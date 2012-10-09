@@ -69,5 +69,9 @@ fprintf('\nCompiling rtlsdr_dev.cpp ... ');
 mex(options{:},'-outdir',RTL_SDR_BIN_DIR,'src/rtlsdr_dev.cpp')
 fprintf('Done.\n');
 
+% copy help file
+copyfile(fullfile(pwd,'src','rtlsdr_dev.m'),fullfile(RTL_SDR_BIN_DIR,'rtlsdr_dev.m'));
+    
+
 % Set path hint
 fprintf('\nBuild successful.\n\nSet path to:\n -> %s\n -> %s\n',RTL_SDR_BIN_DIR,fullfile(pwd,'blockset'));
