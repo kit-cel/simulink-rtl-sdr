@@ -1,5 +1,5 @@
 /*
-* Copyright 2010 Communications Engineering Lab, KIT
+* Copyright 2012 Communications Engineering Lab, KIT
 *
 * This is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -255,7 +255,7 @@ static void mdlStart(SimStruct *S)
     /* set sample rate */
     ret = rtlsdr_set_sample_rate(_device, (uint32_t)sample_rate);
     if (ret < 0) {
-        ssSetErrorStatusf(S,"Failed to set sample rate to %f Hz.\n",sample_rate);
+        ssSetErrorStatusf(S,"Failed to set sample rate to %u Sps.\n",(uint32_t)sample_rate);
     }
     ssPrintf("Sampling at %u Sps.\n", (uint32_t)sample_rate);
 
@@ -266,9 +266,8 @@ static void mdlStart(SimStruct *S)
         if (ret < 0) {
             ssSetErrorStatusf(S,"Failed to set center frequency to %u Hz.\n",frequency);
         }
-        else {
-            ssPrintf("Tuned to %u Hz.\n", frequency);
-        }
+        
+        ssPrintf("Tuned to %u Hz.\n", frequency);
     }
 
     /* set gain */
@@ -276,7 +275,7 @@ static void mdlStart(SimStruct *S)
         int gain = (int)mxGetScalar(ssGetSFcnParam(S, GAIN));
         if (gain == 0) {
 
-             /* Enable automatic gain */
+            /* Enable automatic gain */
             ret = rtlsdr_set_tuner_gain_mode(_device, TUNE_AUTO);
             if (ret < 0) {
                 ssSetErrorStatus(S,"Failed to enable automatic gain.");

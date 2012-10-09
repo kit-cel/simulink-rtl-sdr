@@ -1,5 +1,5 @@
 %
-% Copyright 2010 Communications Engineering Lab, KIT
+% Copyright 2012 Communications Engineering Lab, KIT
 %
 % This is free software; you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 function [RootPath] = rtlsdr_get_path()
 
 % Check input arguments
-narginchk(0, 1);
+error(nargchk(0, 0, nargin, 'struct'));
 
 % Find paths
 BlocksetPath = fileparts(mfilename('fullpath'));

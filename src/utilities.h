@@ -1,5 +1,5 @@
 /*
-* Copyright 2010 Communications Engineering Lab, KIT
+* Copyright 2012 Communications Engineering Lab, KIT
 *
 * This is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@
 
 #ifndef UTILITIES
 #define UTILITIES
-    
 
 /* printf for "ssWarning" */
 static char errorMessage[512];
@@ -41,5 +40,34 @@ static char errorMessage[512];
 #define NUMERIC_NOTEMPTY_OR_DIE(S, param) \
     if (!mxIsNumeric( ssGetSFcnParam(S,param) ) || mxIsEmpty( ssGetSFcnParam(S,param) ) ) \
         {ssSetErrorStatusf(S,"? parameter to S-function must be numeric", "");return;}
+
+#define CHECK_DEVICE_INDEX(param) \
+if (!mxIsNumeric(param) || (mxGetScalar(param) < 0)) \
+    {mexErrMsgTxt("Gain must be numeric");return;}
+
+#define CHECK_DEVICE_HANDLE(param) \
+char tmp[100]; sprintf(tmp,"%d",*(int**)mxGetPr(param)); \
+if (!mxIsDouble(param) || mxIsComplex(param) || !(mxGetN(param)==1) || !(mxGetM(param)==1) || mxIsEmpty(param) || !atoi(tmp)) \
+    {mexErrMsgTxt("Parameter to mex-function must be numeric");return;}
+
+#define CHECK_SAMPLE_RATE(param) \
+if (!mxIsNumeric(param) || mxIsEmpty(param) || !(mxGetScalar(param) > 0)) \
+    {mexErrMsgTxt("Samples per Second must be numeric and greater zero");return;}
+
+#define CHECK_FREQUENCY(param) \
+if (!mxIsNumeric(param) || !(mxGetScalar(param) > 0)) \
+    {mexErrMsgTxt("Frequency must be numeric and greater zero");return;}
+
+#define CHECK_GAIN(param) \
+if (!mxIsNumeric(param)) \
+    {mexErrMsgTxt("Gain must be numeric");return;}
+
+#define CHECK_AGC_ON(param) \
+if (!mxIsNumeric(param) || mxIsEmpty(param)) \
+    {mexErrMsgTxt("Autmatic Gain Control must be numeric");return;}
+
+#define CHECK_BUF_LENGTH(param) \
+if (!mxIsNumeric(param) || mxIsEmpty(param) || !(mxGetScalar(param) > 0)) \
+    {mexErrMsgTxt("Buffer Length must be numeric and greater zero");return;}
 
 #endif /* UTILITIES */

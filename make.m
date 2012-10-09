@@ -62,8 +62,11 @@ end
 fprintf('\nCompiling rtlsdr_source.cpp ... ');
 mex(options{:},'-outdir',RTL_SDR_BIN_DIR,'src/rtlsdr_source.cpp')
 fprintf('Done.\n');
-fprintf('\nCompiling rtlsdr_find_devices.cpp.cpp ... ');
+fprintf('\nCompiling rtlsdr_find_devices.cpp ... ');
 mex(options{:},'-outdir',RTL_SDR_BIN_DIR,'src/rtlsdr_find_devices.cpp')
+fprintf('Done.\n');
+fprintf('\nCompiling rtlsdr_dev.cpp ... ');
+mex(options{:},'-outdir',RTL_SDR_BIN_DIR,'src/rtlsdr_dev.cpp')
 fprintf('Done.\n');
 
 % Set path hint

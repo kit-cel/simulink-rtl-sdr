@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+z6<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -48,6 +48,8 @@
               <p><a href="#requ">Requirements</a></p>
               <p><a href="#insl">Build/Install instructions for Linux</a></p>
               <p><a href="#insw">Build/Install instructions for Microsoft Windows</a></p>
+              <p><a href="#bloc">Block Reference</a></p>
+              <p><a href="#func">Function Reference</a></p>
               <p><a href="#link">Weblinks</a></p>
               <p><a href="#copy">Copyright</a></p>
               <p><a href="#cont">Contact</a></p>
@@ -60,7 +62,7 @@
     <!-- Requirements -->
     <h3><a name="requ">Requirements</a></h3>
     <ul>
-      <li>MATLAB/Simulink (R2009b or newer) and <em>MEX</em> compatible compiler</li>
+      <li>MATLAB/Simulink (R2009b or newer) and <em>MEX</em> <a href="http://www.mathworks.de/support/compilers">compatible</a> Compiler</li>
       <li>rtl-sdr library from the <a href="http://sdr.osmocom.org/trac/wiki/rtl-sdr">OsmoSDR Wiki</a></li>
     </ul>
     The Simulink-rtl-sdr software package doesn't come with precompiled binaries due to license issues, but the compilation is quite simple.</br></br>
@@ -100,7 +102,7 @@
       </li>
 
       <li>
-          Add the <em>bin</em> and the <em>blockset</em> directory to the MATLAB path environment.
+          Add the <tt>bin</tt> and the <tt>blockset</tt> directory to the MATLAB path environment.
       </li>
 
       <li>
@@ -155,7 +157,7 @@
       </li>
 
       <li>
-          Modify make.m to point to the *rtl-sdr* include and lib directory. If you are using a 64-bit MATLAB, make sure to use a 64-bit build of the *rtl-sdr* library.
+          Modify make.m to point to the <em>rtl-sdr</em> include and lib directory. If you are using a 64-bit MATLAB, make sure to use a 64-bit build of the <em>rtl-sdr</em> library.
           <pre>
           RTL_SDR_INC_DIR = &lt;path to rtl-sdr.h&gt;
           RTL_SDR_LIB_DIR = &lt;path to rtl-sdr.lib&gt;</pre>
@@ -179,6 +181,17 @@
           You will now find a new Toolbox named Simulink-RTL-SDR in the <tt>Simulink Library Browser</tt>. Additionally, a simple spectrum scope model is located in the directory <em>demo</em>.
       </li>
     </ol>
+
+    <!-- Block References -->
+    <h3><a name="bloc">Block Reference</a></h3>
+    The Simulink-RTL-SDR software package comes with one Simulink block that can be found in the Simulink Block Library <em>Simulink-RTL-SDR</em>. For more details refer to the following site:
+    <ul>
+      <li><a href="rtlsdr_source.html">rtlsdr_source</a>: Receive data from the rtl-sdr device.</li>
+    </ul>
+
+    <!-- Function References -->
+    <h3><a name="func">Function References</a></h3>
+    Allthough the Simulink-RTL-SDR software packages is primarily designed for the use in Simulink, it can also be used in MATLAB scripts. The MATLAB function <em>rtlsdr_dev</em> provides the same functionality like the Simulink block. For more details about the usage and other functions refer to the <a href="function_references.html">reference site</a>.
 
     <!-- Weblinks -->
     <h3><a name="link">Weblinks</a></h3>
