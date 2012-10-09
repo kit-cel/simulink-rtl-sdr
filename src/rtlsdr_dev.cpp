@@ -38,6 +38,7 @@
 #define GAIN          prhs[3]
 #define AGC_ON        prhs[4]
 #define BUF_LENGTH    prhs[5]
+#define DEVICE_HANDLE plhs[0]
 #define RECEIVE_DATA  plhs[0]
 #define num_inputs    6
 #define num_outputs   1
@@ -71,7 +72,7 @@ static void rtlsdr_callback(unsigned char *buf, uint32_t len, void *ctx)
 	CallbackData *cb_data = (CallbackData*)ctx;
 
 	if (ctx) {
-		/*(*cb_data).buffer = (unsigned char*) buf;*/
+		
 		memcpy((*cb_data).buffer,(unsigned char*) buf,((*cb_data).buf_length<<1));
 		rtlsdr_cancel_async(_devices[(*cb_data).device_index]);
 	}
@@ -92,6 +93,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 	int ret;
 	char errmsg[250];
 
+	/* close device */
     if (nlhs == 0 && nrhs == 1) {
 
     	/* check input */
@@ -99,13 +101,6 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 
     	/* get device index from input */
     	int device_index = (int)mxGetScalar(DEVICE_INDEX);
-
-    	/* reset settings */
-	    _sample_rates[device_index] = -1;
-		_frequencies [device_index] = -1;
-		_gains       [device_index] = -1000;
-		_agcs_on     [device_index] = -1;
-		_buf_lengths [device_index] = -1;
 
     	/* check if device is used */
     	if (_devices[device_index]) {
@@ -118,9 +113,40 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 		        return;
 		    }
 
-        	_devices     [device_index] = NULL;
+        	_devices[device_index] = NULL;
 
-		    mexPrintf("Closed rtl-sdr device #%d.\n",device_index);
+		    /* reset settings */
+		    _sample_rates[device_index] = -1;
+			_frequencies [device_index] = -1;
+			_gains       [device_index] = -1000;
+			_agcs_on     [device_index] = -1;
+			_buf_lengths [device_index] = -1;
+
+			mexPrintf("Closed rtl-sdr device #%d.\n",device_index);
+		}
+		/* device is not used */
+		else {
+
+			sprintf(errmsg,"rtl-sdr device #%d is not in use.\n",device_index); mexErrMsgTxt(errmsg);
+		}
+    }
+    /* open device */
+    else if (nrhs == 1 && nlhs == 1) {
+
+    	/* initialize device handle */
+    	DEVICE_HANDLE = mxCreateDoubleMatrix(1, 1, mxREAL);
+		*mxGetPr(DEVICE_HANDLE) = -1;
+
+    	/* check input */
+    	CHECK_DEVICE_INDEX(DEVICE_INDEX);
+
+    	/* get device index from input */
+    	int device_index = (int)mxGetScalar(DEVICE_INDEX);
+
+    	/* check if device is used */
+    	if (_devices[device_index]) {
+
+    		sprintf(errmsg,"rtl-sdr device #%d is already in use.\n",device_index); mexErrMsgTxt(errmsg);
 		}
 		/* device is not used */
 		else {
@@ -139,9 +165,18 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 		        mexErrMsgTxt("Failed to reset buffer.\n");
 		    }
 
-		    mexPrintf("Using rtl-sdr device #%d: %s\n",device_index,rtlsdr_get_device_name(device_index));
+		    *mxGetPr(DEVICE_HANDLE) = device_index;
+
+	    	/* reset settings */
+		    _sample_rates[device_index] = -1;
+			_frequencies [device_index] = -1;
+			_gains       [device_index] = -1000;
+			_agcs_on     [device_index] = -1;
+			_buf_lengths [device_index] = -1;
+
+			mexPrintf("Using rtl-sdr device #%d: %s\n",device_index,rtlsdr_get_device_name(device_index));
 		}
-    }    
+    }
     else if (nrhs == num_inputs && nlhs == num_outputs) {
 
     	/* check input */
@@ -289,17 +324,20 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 
     	/* Usage */
     	mexPrintf("\nUsage:"
-    				"\n\n\t# Initialize/Close rtl-sdr device:\n\n"
-    				  "     \t\trtlsdr_dev(index)\n\n"
-    				  "     \t# Receive IQ-data from rtl-sdr device:\n\n"
-                      "     \t\tdata = rtlsdr_dev(index,samplerate,frequency,gain,agc,buf_length)\n\n\n"
+    				"\n\n\t# Initialize rtl-sdr device:\n\n"
+    				  "     \t\thandle = rtlsdr_dev(index)\n\n"
+    				  "     \t# Close rtl-sdr device:\n\n"
+    				  "     \t\trtlsdr_dev(handle)\n\n"
+    				  "     \t# Receive IQ-samples from rtl-sdr device:\n\n"
+                      "     \t\tdata = rtlsdr_dev(handle,samplerate,frequency,gain,agc,buf_length)\n\n\n"
                       "     \t      index - The device index (e.g. 0).\n"
+                      "     \t     handle - The returned handle used for addressing the initialized rtl-sdr device.\n"
                       "     \t samplerate - The sampling rate of the device (e.g. 1e6 for 1 MHz bandwidth).\n"
                       "     \t  frequency - The center frequency of the tuner (e.g. 100e6 for 100 MHz).\n"
                       "     \t       gain - The overall gain of the receiver. Use 0 for automatic.\n"
                       "     \t        agc - Switch the internal digital AGC On or Off (0 means Off).\n"
                       "     \t buf_length - The number of samples in the receive buffer (e.g. 1000).\n"
-                      "     \t       data - The received IQ-data.\n\n");
+                      "     \t       data - The received IQ-samples.\n\n");
 
     	return;
     }
