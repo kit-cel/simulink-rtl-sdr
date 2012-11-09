@@ -30,17 +30,32 @@ if ispc
     RTL_SDR_INC_DIR = fullfile(pwd,'deps','rtl-sdr-release');
     % this should point to the directory of rtlsdr.lib
     RTL_SDR_LIB_DIR = fullfile(pwd,'deps','rtl-sdr-release','x64');
-    % make sure the required dll are in your PATH 
-    % (e.g. place them in the current directory)
+    
+    % this should point to the directory of pthread.h
+    PTHREAD_INC_DIR = fullfile(pwd,'deps','pthread','include');
+    % this should point to the directory of pthreadVC.lib
+    PTHREAD_LIB_DIR = fullfile(pwd,'deps','pthread','lib','x64');
+    
+    % make sure the other required DLLS are in your PATH 
+    % (e.g. place them in the bin directory)
+    
     options = { ...
         ['-I' pwd]; ...
         ['-I' RTL_SDR_INC_DIR]; ...
         ['-L' RTL_SDR_LIB_DIR]; ...
-        ['-l' 'rtlsdr']
+        ['-l' 'rtlsdr']; ...
+    };
+    options_pthread = { ...
+        ['-I' PTHREAD_INC_DIR]; ...
+        ['-L' PTHREAD_LIB_DIR]; ...
+        ['-l' 'pthreadVC2'] ...
     };
 elseif isunix
     options = { ...
         ['-l' 'rtlsdr']
+    };
+    options_pthread = { ...
+        ['-l' 'pthread'] ...
     };
 else
     error('Platform not supported')
@@ -60,11 +75,13 @@ end
 
 % compile source and find_devices
 fprintf('\nCompiling rtlsdr_source.cpp ... ');
-mex(options{:},'-outdir',RTL_SDR_BIN_DIR,'src/rtlsdr_source.cpp')
+mex(options{:},options_pthread{:},'-outdir',RTL_SDR_BIN_DIR,'src/rtlsdr_source.cpp')
 fprintf('Done.\n');
+
 fprintf('\nCompiling rtlsdr_find_devices.cpp ... ');
 mex(options{:},'-outdir',RTL_SDR_BIN_DIR,'src/rtlsdr_find_devices.cpp')
 fprintf('Done.\n');
+
 fprintf('\nCompiling rtlsdr_dev.cpp ... ');
 mex(options{:},'-outdir',RTL_SDR_BIN_DIR,'src/rtlsdr_dev.cpp')
 fprintf('Done.\n');
