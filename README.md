@@ -5,8 +5,6 @@ The Simulink-RTL-SDR project is an Open Source Software Package that enables own
 
 The Simulink-RTL-SDR project was initiated at the *Communication Engineering Lab (CEL)* at the *Karlsruhe Institute of Technology (KIT)*, Germany, <http://www.cel.kit.edu>.
 
-For more information, please visit the Simulink-RTL-SDR [project page](http://www.cel.kit.edu/simulink_rtl_sdr.php).
-
 Requirements
 ------------
 
@@ -101,8 +99,41 @@ Build/Install instructions for Microsoft Windows
 
 13. You will now find a new Toolbox named Simulink-RTL-SDR in the *Simulink Library Browser*. Additionally, a simple spectrum scope model is located in the directory *demo*.
 
+Weblinks
+--------
+
+The following table lists various weblinks which might be useful to you:
+
+- [rtl-sdr](http://sdr.osmocom.org/trac/wiki/rtl-sdr) - Information about the DVB-T dongles with an Realtek RTL2832U chipset and software to interface them.
+- [Communication Engineering Lab (CEL)](http://www.cel.kit.edu/english/index.php) - The institute at the Karlsruhe Institute of Technology, Germany, that initiated the Simulink-RTL-SDR project.
+- [Karlsruhe Institute of Technology (KIT)](http://www.kit.edu/english/index.php) - Karlsruhe Institute of Technology (KIT), University of the State Baden-Württemberg and National Large-scale Research Center of the Helmholtz-Association.
+
+Copyright
+---------
+
+The Simulink-RTL-SDR interface consists of software from several authors under different licenses. The following table lists all included software packages:
+
+- *Simulink-RTL-SDR*  
+  Authors: Communication Engineering Lab (CEL), Karlsruhe Institute of Technology (KIT), Michael Schwall, Sebastian Koslowski  
+  License: GNU General Public License  
+  Source:  simulink-rtlsdr/
+- *rtl-sdr*  
+  Authors: Steve Markgraf, Dimitri Stolnikov, Hoernchen  
+  License: GNU General Public License  
+  Source:  wherever you saved it
+
+Contact
+-------
+
+If you have further questions concerning the Simulink-RTL-SDR interface (e.g. the build-process) or you've found a bug, please feel free to contact us:
+
+- Michael Schwall - [michael.schwall@kit.edu](mailto:michael.schwall@kit.edu)
+- Sebastian Koslowski - [sebastian.koslowski@kit.edu](mailto:sebastian.koslowski@kit.edu)
+
 Change-log
 ---------
+
+- v1.2: Moved project information from cel.kit.edu to GitHub
 
 - v1.1: Switched to async mode for sample reading
 
