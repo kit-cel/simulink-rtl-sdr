@@ -65,7 +65,14 @@ Build/Install instructions for Microsoft Windows
         Supported gain values (18): -1.0 1.5 4.0 6.5 9.0 11.5 14.0 16.5 19.0 21.5 24.0 29.0 34.0 42.0 43.0 45.0 47.0 49.0 
         Reading samples in async mode...
 
-5. Get *pthreads for Windows* from their [download page](ftp://sourceware.org/pub/pthreads-win32/). Version 2.9.1 has been tested successfully ([direct download link](ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.zip)).
+5. Get *pthreads for Windows* from their download page:
+
+		ftp://sourceware.org/pub/pthreads-win32/ 
+
+
+	Version 2.9.1 has been tested successfully 
+
+		ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.zip
 
 6. Get the Simulink-RTL-SDR source from the [GitHub](https://github.com/kit-cel/simulink-rtl-sdr) project page
 
@@ -122,13 +129,21 @@ The Simulink-RTL-SDR interface consists of software from several authors under d
   License: GNU General Public License  
   Source:  wherever you saved it
 
-Contact
--------
+Contact and Support
+-------------------
 
 If you have further questions concerning the Simulink-RTL-SDR interface (e.g. the build-process) or you've found a bug, please feel free to contact us:
 
 - Michael Schwall - [michael.schwall@kit.edu](mailto:michael.schwall@kit.edu)
 - Sebastian Koslowski - [sebastian.koslowski@kit.edu](mailto:sebastian.koslowski@kit.edu)
+
+Please provide the following information when requesting support:
+
+- Operating System (Linux/Windows, 32-bit/64-bit, Linux-Distribution, ...)
+- MATLAB version (R20***, 32-bit/64-bit, ...)
+- Compiler and version (GCC x.x.x, MVSC, ...)
+- Detailed error report (MATLAB console output or GUI screen-shot)
+- ...and all other information you consider as meaningful ;)
 
 Change-log
 ---------
