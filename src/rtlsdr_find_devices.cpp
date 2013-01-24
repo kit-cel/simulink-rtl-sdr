@@ -31,7 +31,7 @@
 /* Entry point to C/C++ */
 void mexFunction(int nlhs,mxArray *plhs[],int nrhs,const mxArray *prhs[])
 {
-    int_T i, count, ret;
+    int_T i, j, ret;
     char vendor[256], product[256], serial[256];
     int gains[100];
 
@@ -86,8 +86,8 @@ void mexFunction(int nlhs,mxArray *plhs[],int nrhs,const mxArray *prhs[])
         }
         mexPrintf("  Gains [dB]:\t", ret);
 
-        for (i = 0; i < ret; i++)
-            mexPrintf("%.1f ", gains[i] / 10.0);
+        for (j = 0; j < ret; j++)
+            mexPrintf("%.1f ", gains[j] / 10.0);
         mexPrintf("\n");
 
         /* get Tuner type */
