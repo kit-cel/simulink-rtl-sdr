@@ -31,6 +31,12 @@ Build/Install instructions for Linux
         Supported gain values (18): -1.0 1.5 4.0 6.5 9.0 11.5 14.0 16.5 19.0 21.5 24.0 29.0 34.0 42.0 43.0 45.0 47.0 49.0 
         Reading samples in async mode...
 
+   In case of something like `usb_claim_interface error -6`, you have to unload the dvb-t module driver which blocks the rtl-sdr dongle
+
+   		$ sudo rmmod dvb_usb_rtl28xxu 
+
+   Alternatively, add this module to your blacklist.
+
 3. Get the Simulink-RTL-SDR source from the [GitHub](https://github.com/kit-cel/simulink-rtl-sdr) project page
 
 		$ git clone git://github.com/kit-cel/simulink-rtl-sdr.git
