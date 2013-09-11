@@ -106,6 +106,8 @@ Build/Install instructions for Microsoft Windows
 
 		>> make.m
 
+	In case of something like `stdint.h missing`, get the appropriate file for example from the [msinttypes project](http://code.google.com/p/msinttypes) and copy it to the *RTL_SDR_INC_DIR* path.
+
 11. Add the *bin* and the *blockset* directory to the MATLAB path environment.
 
 12. Place the required DLLs in the *bin* directory of Simulink-RTL-SDR. If you downloaded the release versions of the *rtl-sdr* and *pthreads* libraries, simply copy all included dlls into the *bin* directory. Again, make sure you copy the x64 versions if your using 64-bit MATLAB.
