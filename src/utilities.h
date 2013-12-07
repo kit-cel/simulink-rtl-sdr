@@ -43,7 +43,7 @@ static char errorMessage[512];
 
 #define CHECK_DEVICE_INDEX(param) \
 if (!mxIsNumeric(param) || (mxGetScalar(param) < 0)) \
-    {mexErrMsgTxt("Gain must be numeric");return;}
+    {mexErrMsgTxt("Device Index must be numeric");return;}
 
 #define CHECK_DEVICE_HANDLE(param) \
 char tmp[100]; sprintf(tmp,"%d",*(int**)mxGetPr(param)); \
