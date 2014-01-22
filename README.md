@@ -121,6 +121,7 @@ Weblinks
 
 The following table lists various weblinks which might be useful to you:
 
+- [simulink-rtl-sdr-BPSK-example](https://github.com/rma-ciss/simulink-rtl-sdr-BPSK-example) - An educational BPSK receiver model using simulink-rtl-sdr
 - [rtl-sdr](http://sdr.osmocom.org/trac/wiki/rtl-sdr) - Information about the DVB-T dongles with an Realtek RTL2832U chipset and software to interface them.
 - [Communication Engineering Lab (CEL)](http://www.cel.kit.edu/english/index.php) - The institute at the Karlsruhe Institute of Technology, Germany, that initiated the Simulink-RTL-SDR project.
 - [Karlsruhe Institute of Technology (KIT)](http://www.kit.edu/english/index.php) - Karlsruhe Institute of Technology (KIT), University of the State Baden-Württemberg and National Large-scale Research Center of the Helmholtz-Association.
